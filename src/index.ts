@@ -10,6 +10,9 @@ export function objectMerge(target, ...sources) {
 
   if (isObject(target) && isObject(source)) {
     for (const key in source) {
+      if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+        return target;
+      }
       if (isObject(source[key])) {
         if (!target[key]) {
           Object.assign(target, { [key]: {} });
